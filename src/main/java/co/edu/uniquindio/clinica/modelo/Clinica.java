@@ -1,0 +1,76 @@
+package co.edu.uniquindio.clinica.modelo;
+
+import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
+import co.edu.uniquindio.clinica.utils.EnvioEmail;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Clinica {
+    @Getter
+    private List<Cita> citas;
+    private List<Servicio> servicios;
+    private List<Paciente> pacientes;
+    public static Clinica clinica;
+
+    //singleton
+    public static Clinica getInstancia() {
+        if (clinica == null) {
+            clinica = new Clinica();
+        }
+        return clinica;
+    }
+
+    public Clinica() {
+        this.citas = new ArrayList<>();
+        this.servicios = new ArrayList<>();
+        this.pacientes = new ArrayList<>();
+    }
+
+    public void registrarPaciente(Paciente paciente) throws Exception{
+        for (Paciente p : pacientes) {
+            if(p.getCedula().equals(paciente.getCedula())){
+                throw new Exception("Un paciente con la cédula dada ya existe");
+            }
+        }
+        pacientes.add(paciente);
+    }
+
+    public void registrarCita(Cita cita, String email, Paciente paciente, Servicio servicio) throws Exception{
+        for (Cita c : citas) {
+            if(c.getPaciente().equals(cita.getPaciente()) && c.getFecha().equals(cita.getFecha())){
+                throw new Exception("Cita en la misma fecha para el paciente");
+            }
+        }
+        citas.add(cita);
+        //Hacer el envio del email
+        Factura factura = generarFactura(paciente, servicio);
+
+        String cuerpo = String.format(
+                "Hola %s,\n\nTu cita para el servicio '%s' ha sido agendada exitosamente.\n" +
+                        "Fecha y hora de la cita: %s\n" +
+                        "Valor a pagar: $%.2f\n\n" +
+                        "Gracias.",
+                paciente.getNombre(),
+                servicio.getNombre(),
+                factura.getFecha().toString(),
+                factura.getTotal()
+        );
+
+        EnvioEmail.enviarNotificacion(email, "Confirmación de su cita", cuerpo);
+    }
+
+    public Factura generarFactura(Paciente paciente, Servicio servicio) throws Exception{
+        return paciente.getSuscripcion().generarFacturaCobro(servicio);
+    }
+
+    public List<Servicio> getServiciosDisponibles() {
+        return new ArrayList<>(servicios);
+    }
+
+    public List<Servicio> getServiciosDisponibles(Suscripcion suscripcion) {
+        return suscripcion.getServiciosDisponibles();
+    }
+
+}
