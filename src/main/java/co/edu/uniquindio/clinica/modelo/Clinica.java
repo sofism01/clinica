@@ -2,10 +2,13 @@ package co.edu.uniquindio.clinica.modelo;
 
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
 import co.edu.uniquindio.clinica.utils.EnvioEmail;
+import javafx.scene.control.Alert;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Clinica {
     @Getter
@@ -13,6 +16,7 @@ public class Clinica {
     private List<Servicio> servicios;
     private List<Paciente> pacientes;
     public static Clinica clinica;
+    private Set<String> cedulasRegistradas = new HashSet<>();
 
     //singleton
     public static Clinica getInstancia() {
@@ -28,12 +32,27 @@ public class Clinica {
         this.pacientes = new ArrayList<>();
     }
 
-    public void registrarPaciente(Paciente paciente) throws Exception{
-        for (Paciente p : pacientes) {
-            if(p.getCedula().equals(paciente.getCedula())){
-                throw new Exception("Un paciente con la cédula dada ya existe");
-            }
+    public void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.show();
+    }
+
+    public void registrarPaciente(String nombre, String cedula, String telefono, String email) throws Exception{
+        // Validar que el paciente no esté repetido
+        if (cedulasRegistradas.contains(cedula)) {
+            throw new Exception("El número de cedula ya está registrado");
+
         }
+        Paciente paciente = Paciente.builder()
+                .nombre(nombre)
+                .cedula(cedula)
+                .telefono(telefono)
+                .email(email)
+                .build();
+        cedulasRegistradas.add(cedula);
         pacientes.add(paciente);
     }
 
