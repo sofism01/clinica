@@ -2,6 +2,10 @@ package co.edu.uniquindio.clinica.controladores;
 
 import co.edu.uniquindio.clinica.modelo.Clinica;
 import co.edu.uniquindio.clinica.modelo.Paciente;
+import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
+import co.edu.uniquindio.clinica.modelo.factory.SuscripcionBasica;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,7 +26,7 @@ public class RegistroPacienteControlador {
     private URL location;
 
     @FXML
-    private ComboBox<?> cmbSuscripcion;
+    private ComboBox<String> cmbSuscripcion;
 
     @FXML
     private TextField txtCedula;
@@ -36,18 +40,26 @@ public class RegistroPacienteControlador {
     @FXML
     private TextField txtTelefono;
 
+    private ObservableList<Suscripcion> listaSuscripcion;
+
+    public RegistroPacienteControlador(){
+        listaSuscripcion = FXCollections.observableArrayList();
+        clinica = Clinica.getInstancia();
+    }
+
+
     @FXML
     void registrarPaciente(ActionEvent event) {
         try {
             clinica.registrarPaciente(
                     txtNombre.getText(),
-            txtCedula.getText(),
-            txtEmail.getText(),
-            txtTelefono.getText()
-);
+                    txtCedula.getText(),
+                    txtEmail.getText(),
+                    txtTelefono.getText()
+); //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
+            limpiarCampos();
         } catch (Exception e) {
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
-            limpiarCampos();
         }
     }
 
@@ -56,10 +68,11 @@ public class RegistroPacienteControlador {
         txtCedula.clear();
         txtEmail.clear();
         txtTelefono.clear();
+        cmbSuscripcion.getItems().clear();
     }
 
     @FXML
     void initialize() {
-
+        cmbSuscripcion.getItems().addAll("Suscripcion Basica", "Suscripcion Premium");
     }
 }

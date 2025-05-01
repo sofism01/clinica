@@ -32,7 +32,7 @@ public class ListaCitasControlador {
 
     @FXML
     private TableView<Cita> tablaCitas;
-//coemntario
+
     @FXML
     void initialize() {
 
