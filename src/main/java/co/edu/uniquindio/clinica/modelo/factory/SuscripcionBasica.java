@@ -1,6 +1,7 @@
 package co.edu.uniquindio.clinica.modelo.factory;
 
-import co.edu.uniquindio.clinica.enums.Servicios;
+import co.edu.uniquindio.clinica.enums.TipoServicio;
+import co.edu.uniquindio.clinica.enums.TipoSuscripcion;
 import co.edu.uniquindio.clinica.modelo.Factura;
 import co.edu.uniquindio.clinica.modelo.Servicio;
 
@@ -9,58 +10,54 @@ import java.util.*;
 
 
 public class SuscripcionBasica implements Suscripcion {
-    private List<Servicio> serviciosIncluidos;
-
-    public SuscripcionBasica() {
-        this.serviciosIncluidos = generarServiciosAleatorios(5); //  5 servicios aleatorios
-    }
-
-    private List<Servicio> generarServiciosAleatorios(int cantidad) {
-        List<Servicios> todos = new ArrayList<>(Arrays.asList(Servicios.values()));
-        Collections.shuffle(todos);
-        List<Servicio> seleccionados = new ArrayList<>();
-
-
-        for (int i = 0; i < cantidad && i < todos.size(); i++) {
-            Servicios tipo = todos.get(i);
-            String id = UUID.randomUUID().toString();
-            String nombre = tipo.name();
-            double precio = 80000;
-            seleccionados.add(new Servicio(id, nombre, precio));
-        }
-
-        return seleccionados;
+    @Override
+    public TipoSuscripcion getNombreSuscripcion() {
+        return TipoSuscripcion.BASICA;
     }
 
     @Override
     public List<Servicio> getServiciosDisponibles() {
-        return serviciosIncluidos;
+        return List.of(
+                Servicio.builder()
+                        .precio(20000)
+                        .nombre(String.valueOf(TipoServicio.OFTALMOLOGIA))
+                        .build(),
+                Servicio.builder()
+                        .precio(0)
+                        .nombre(String.valueOf(TipoServicio.CONSULTA_GENERAL))
+                        .build(),
+                Servicio.builder()
+                        .precio(50000)
+                        .nombre(String.valueOf(TipoServicio.NEUMOLOGIA))
+                        .build(),
+                Servicio.builder()
+                        .precio(40000)
+                        .nombre(String.valueOf(TipoServicio.PSIQUIATRIA))
+                        .build()
+        );
     }
 
     @Override
-    public Factura generarFacturaCobro(Servicio servicio) {
-        double subtotal = servicio.getPrecio();
+    public Factura generarFacturaCobro(TipoServicio tipoServicio) {
+
+        double subtotal = tipoServicio.getPrecio();
         double total;
 
-        if (serviciosIncluidos.indexOf(servicio) >= 0) {
-            int index = serviciosIncluidos.indexOf(servicio);
+        Servicio servicio = getServiciosDisponibles().stream()
+                .filter(s -> s.getNombre().equals(tipoServicio))
+                .findFirst().orElse(null);
 
-            if (index < 2) {
-                total = 0; // Gratis
-            } else if (index < 5) {
-                total = subtotal * 0.2; // 20% de descuento
-            } else {
-                total = subtotal; // Precio completo
-            }
-        } else {
-            total = subtotal; // Si el servicio no wsta en la suscripcion sepaga completo
+        if(servicio == null){
+            total = subtotal;
+        }else{
+            total = servicio.getPrecio();
         }
 
-        return new Factura.FacturaBuilder()
-                .id(UUID.randomUUID().toString())
+        return Factura.builder()
+                .id(String.valueOf(UUID.randomUUID()))
                 .fecha(LocalDateTime.now())
                 .subtotal(subtotal)
                 .total(total)
                 .build();
     }
-}
+    }

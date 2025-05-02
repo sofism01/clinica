@@ -1,5 +1,6 @@
 package co.edu.uniquindio.clinica.controladores;
 
+import co.edu.uniquindio.clinica.enums.TipoSuscripcion;
 import co.edu.uniquindio.clinica.modelo.Clinica;
 import co.edu.uniquindio.clinica.modelo.Paciente;
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
@@ -13,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class RegistroPacienteControlador {
@@ -73,6 +75,11 @@ public class RegistroPacienteControlador {
 
     @FXML
     void initialize() {
-        cmbSuscripcion.getItems().addAll("Suscripcion Basica", "Suscripcion Premium");
+        cmbSuscripcion.getItems().addAll(
+                Arrays.stream(TipoSuscripcion.values())
+                        .map(TipoSuscripcion::getNombre)
+                        .toList()
+        );
+
     }
 }

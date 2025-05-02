@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @Getter
+@Builder
 public class  Factura {
     private final String id;
     private final LocalDateTime fecha;
