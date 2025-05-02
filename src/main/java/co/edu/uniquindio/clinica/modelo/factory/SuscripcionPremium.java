@@ -1,9 +1,8 @@
 package co.edu.uniquindio.clinica.modelo.factory;
 
-import co.edu.uniquindio.clinica.Servicios;
+import co.edu.uniquindio.clinica.enums.Servicios;
 import co.edu.uniquindio.clinica.modelo.Factura;
 import co.edu.uniquindio.clinica.modelo.Servicio;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -60,7 +59,7 @@ public class SuscripcionPremium implements  Suscripcion{
 
         Collections.shuffle(disponibles);
         List<Servicio> nuevos = new ArrayList<>();
-        Random random = new Random();
+
 
         for (int i = 0; i < cantidad && i < disponibles.size(); i++) {
             Servicios tipo = disponibles.get(i);

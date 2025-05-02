@@ -54,8 +54,8 @@ public class RegistroPacienteControlador {
             clinica.registrarPaciente(
                     txtNombre.getText(),
                     txtCedula.getText(),
-                    txtEmail.getText(),
-                    txtTelefono.getText()
+                    txtTelefono.getText(),
+                    txtEmail.getText()
 ); //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
             limpiarCampos();
         } catch (Exception e) {

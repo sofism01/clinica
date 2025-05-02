@@ -58,8 +58,8 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
+             <TextField fx:id="txtNombre" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtTelefono" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtNombre" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtEmail" maxWidth="200.0" minWidth="200.0" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="cmbSuscripcion" maxWidth="200.0" prefHeight="26.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>

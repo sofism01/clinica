@@ -1,6 +1,6 @@
 package co.edu.uniquindio.clinica.modelo.factory;
 
-import co.edu.uniquindio.clinica.Servicios;
+import co.edu.uniquindio.clinica.enums.Servicios;
 import co.edu.uniquindio.clinica.modelo.Factura;
 import co.edu.uniquindio.clinica.modelo.Servicio;
 
@@ -11,7 +11,7 @@ import java.util.*;
 public class SuscripcionBasica implements Suscripcion {
     private List<Servicio> serviciosIncluidos;
 
-    public SuscripcionBasica(List<Servicio> serviciosBasicos) {
+    public SuscripcionBasica() {
         this.serviciosIncluidos = generarServiciosAleatorios(5); //  5 servicios aleatorios
     }
 

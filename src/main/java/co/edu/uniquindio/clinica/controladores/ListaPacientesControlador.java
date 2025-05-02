@@ -12,13 +12,14 @@ import javafx.scene.control.TableView;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class ListaPacientesControlador implements Initializable, Observable {
+public class ListaPacientesControlador implements Initializable {
 
     Clinica clinica = Clinica.getInstancia();
 
-    private final ObservableList<Paciente> listaPacientes;
+    private ObservableList<Paciente> listaPacientes;
 
 
     @FXML
@@ -46,26 +47,25 @@ public class ListaPacientesControlador implements Initializable, Observable {
     private TableView<Paciente> tablaPacientes;
 
     public ListaPacientesControlador(){
-        this.listaPacientes = FXCollections.observableArrayList();
         this.clinica = Clinica.getInstancia();
 
     }
 
-    private void consultarPacientes(){
-        tablaPacientes.setItems(FXCollections.observableArrayList(listaPacientes));
+    private void consultarPacientes(List<Paciente> pacientes){
+        tablaPacientes.setItems(FXCollections.observableArrayList(pacientes));
     }
 
-    @Override
-    public void notificar() {
-consultarPacientes();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-colIdPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCedula()));
-colNombrePaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-colTelefonoPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
-colEmailPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-colSuscripcionPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSuscripcion().toString()));
+        colIdPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCedula()));
+        colNombrePaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colTelefonoPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+        colEmailPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        colSuscripcionPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSuscripcion().toString()));
+
+        this.listaPacientes = FXCollections.observableArrayList();
+        consultarPacientes(clinica.getPacientes());
+
     }
 }

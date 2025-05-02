@@ -1,6 +1,7 @@
 package co.edu.uniquindio.clinica.modelo;
 
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
+import co.edu.uniquindio.clinica.modelo.factory.SuscripcionBasica;
 import co.edu.uniquindio.clinica.utils.EnvioEmail;
 import javafx.scene.control.Alert;
 import lombok.Getter;
@@ -10,8 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
 public class Clinica {
-    @Getter
+
     private List<Cita> citas;
     private List<Servicio> servicios;
     private List<Paciente> pacientes;
@@ -44,13 +46,30 @@ public class Clinica {
         // Validar que el paciente no esté repetido por cc
         if (cedulasRegistradas.contains(cedula)) {
             throw new Exception("El número de cedula ya está registrado");
-
         }
+            //Validar el numero de telefono
+            if (telefono.length() != 10) {
+                throw new Exception("El número de teléfono debe tener exactamente 10 dígitos");
+            }
+
+            for (char c : telefono.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    throw new Exception("El número de teléfono solo debe contener dígitos");
+                }
+            }
+            //Validar el email
+            if (!email.contains("@") || email.indexOf("@") == 0 || email.lastIndexOf(".")
+                    < email.indexOf("@") + 2 || email.endsWith(".")) {
+                throw new Exception("El email no tiene un formato válido");
+            }
+
+
         Paciente paciente = Paciente.builder()
                 .nombre(nombre)
                 .cedula(cedula)
                 .telefono(telefono)
                 .email(email)
+                .suscripcion( new SuscripcionBasica())
                 .build();
         cedulasRegistradas.add(cedula);
         pacientes.add(paciente);

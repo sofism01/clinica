@@ -1,4 +1,4 @@
-package co.edu.uniquindio.clinica;
+package co.edu.uniquindio.clinica.enums;
 
 public enum Servicios {
     ODONTOLOGIA, PEDIATRIA, GENERAL, ANESTESIOLOGIA, GINECOLOGIA, NEUMOLOGIA,
