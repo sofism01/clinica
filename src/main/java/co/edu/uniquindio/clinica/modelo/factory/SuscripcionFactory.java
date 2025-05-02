@@ -10,11 +10,11 @@ public class SuscripcionFactory {
         BASICA, PREMIUM
     }
 
-    public static Suscripcion crearSuscripcion(TipoSuscripcion tipo, List<Servicio> serviciosBasicos) {
+    public static Suscripcion crearSuscripcion(TipoSuscripcion tipo) {
         return switch (tipo) {
-            case BASICA -> new SuscripcionBasica(serviciosBasicos);
+            case BASICA -> new SuscripcionBasica();
             case PREMIUM -> {
-                SuscripcionBasica basica = new SuscripcionBasica(serviciosBasicos);
+                SuscripcionBasica basica = new SuscripcionBasica();
                 yield new SuscripcionPremium(basica);
             }
         };
