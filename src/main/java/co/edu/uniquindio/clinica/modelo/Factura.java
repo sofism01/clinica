@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @Builder
-public class  Factura {
+public class Factura {
     private final String id;
     private final LocalDateTime fecha;
     private final double subtotal;

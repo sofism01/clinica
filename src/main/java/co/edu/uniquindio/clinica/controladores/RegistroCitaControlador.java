@@ -74,7 +74,7 @@ public class RegistroCitaControlador {
 
     private void limpiarCampos() {
         txtCedula.clear();
-        cmbServicio.getItems().clear();
+        cmbServicio.setValue(null);
         dpFecha.setValue(null);
         cmbHora.setValue(null);
 
