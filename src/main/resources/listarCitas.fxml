@@ -20,7 +20,6 @@
             <TableColumn fx:id="colFechaCita" text="Fecha" />
             <TableColumn fx:id="colPacienteCita" text="Paciente" />
             <TableColumn fx:id="colServicioCita" text="Servicio" />
-            <TableColumn fx:id="colFacturaCita" text="Factura" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

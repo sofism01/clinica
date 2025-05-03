@@ -1,6 +1,7 @@
 package co.edu.uniquindio.clinica.controladores;
 
 import co.edu.uniquindio.clinica.enums.TipoServicio;
+import co.edu.uniquindio.clinica.enums.TipoSuscripcion;
 import co.edu.uniquindio.clinica.modelo.*;
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
 import co.edu.uniquindio.clinica.modelo.factory.SuscripcionBasica;
@@ -14,9 +15,12 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 public class RegistroCitaControlador {
 
@@ -57,6 +61,7 @@ public class RegistroCitaControlador {
                    cmbHora.getValue()
 
            );
+
             limpiarCampos();
 
         } catch (Exception e) {
@@ -68,20 +73,14 @@ public class RegistroCitaControlador {
         txtCedula.clear();
         cmbServicio.getItems().clear();
         dpFecha.setValue(null);
-        cmbHora.getItems().clear();
+        cmbHora.setValue(null);
+
     }
 
 
     @FXML
     void initialize() {
         cmbHora.getItems().addAll(clinica.generarHorarioCitas());
-
-        Suscripcion suscripcionBasica = new SuscripcionBasica();
-        List<Servicio> servicios = suscripcionBasica.getServiciosDisponibles();
-
-        for (Servicio servicio : servicios) {
-            cmbServicio.getItems().add(TipoServicio.valueOf(servicio.getNombre()));
-        }
-
+        cmbServicio.getItems().addAll(TipoServicio.values());
     }
 }

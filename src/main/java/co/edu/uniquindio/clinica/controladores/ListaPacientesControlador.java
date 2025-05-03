@@ -2,7 +2,7 @@ package co.edu.uniquindio.clinica.controladores;
 
 import co.edu.uniquindio.clinica.modelo.Clinica;
 import co.edu.uniquindio.clinica.modelo.Paciente;
-import co.edu.uniquindio.clinica.observador.Observable;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
