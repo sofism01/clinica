@@ -157,4 +157,15 @@ public class Clinica {
         return horarios;
     }
 
+
+    public void eliminarCita(String id) {
+        for (int i = 0; i < citas.size(); i++) {
+            if (citas.get(i).getId().equals(id)) {
+                citas.remove(i);
+            }
+        }
+    }
+
+
+
 }

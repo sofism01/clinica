@@ -6,7 +6,9 @@ import co.edu.uniquindio.clinica.modelo.Paciente;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -41,6 +43,9 @@ public class ListaCitasControlador {
 
     Clinica clinica = Clinica.getInstancia();
 
+
+
+
     private void consultarPacientes(List<Cita> citas){
         tablaCitas.setItems(FXCollections.observableArrayList(citas));
     }
@@ -51,14 +56,40 @@ public class ListaCitasControlador {
     }
 
     @FXML
+    void cancelarCita(ActionEvent event) {
+        // Obtener la cita seleccionada
+        Cita citaSeleccionada = tablaCitas.getSelectionModel().getSelectedItem();
+
+        if (citaSeleccionada != null) {
+            // Eliminar la cita de la clínica
+            clinica.eliminarCita(citaSeleccionada.getId());
+
+            // Refrescar la tabla
+            consultarPacientes(clinica.getCitas());
+        } else {
+            // Puedes mostrar una alerta si no hay selección
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Advertencia");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Por favor seleccione una cita para cancelar.");
+            alerta.showAndWait();
+        }
+    }
+
+
+
+    @FXML
     void initialize() {
         colIdCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         colFechaCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colPacienteCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaciente().getNombre()));
-        colServicioCita.setCellValueFactory(cellData -> new SimpleStringProperty());
-
+        colServicioCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaciente().getSuscripcion().getNombreSuscripcion().toString()));
 
         this.listaCitas = FXCollections.observableArrayList();
         consultarPacientes(clinica.getCitas());
-    }
+
+
+        }
+
+
 }

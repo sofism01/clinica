@@ -71,6 +71,7 @@ public class RegistroPacienteControlador {
 ); //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
 
             limpiarCampos();
+            clinica.mostrarAlerta("Paciente registrado correctamente", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
 
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);

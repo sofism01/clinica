@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class SuscripcionPremium implements  Suscripcion{
     @Override
     public TipoSuscripcion getNombreSuscripcion() {
-        return TipoSuscripcion.BASICA;
+        return TipoSuscripcion.PREMIUM;
     }
 
     @Override

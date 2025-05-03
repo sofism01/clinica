@@ -62,9 +62,10 @@ public class RegistroCitaControlador {
                    cmbHora.getValue()
 
            );
-//el email de confirmación llega al span del correo
+//el email de confirmación llega al spam del correo
 
             limpiarCampos();
+            clinica.mostrarAlerta("Cita agendada correctamente, la factura fue enviada al email del paciente", Alert.AlertType.INFORMATION);
 
         } catch (Exception e) {
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
