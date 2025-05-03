@@ -63,7 +63,14 @@ public class Clinica {
                     < email.indexOf("@") + 2 || email.endsWith(".")) {
                 throw new Exception("El email no tiene un formato válido");
             }
+        //Validar los campos no sean vacios
+        if (nombre.isEmpty() || cedula.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+            throw new Exception("Todos los campos son necesarios");
+        }
 
+        if (suscripcion == null) {
+            throw new Exception("Seleccione una suscripcion");
+        }
 
         Paciente paciente = Paciente.builder()
                 .nombre(nombre)
@@ -82,7 +89,10 @@ public class Clinica {
                 .findFirst()
                 .orElseThrow(() -> new Exception("Paciente no encontrado"));
 
-
+//Validar los campos no sean vacios
+        if (idPaciente.isEmpty() || tipoServicio==null || dia==null || hora==null) {
+            throw new Exception("Todos los campos son necesarios");
+        }
 
         if (dia.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
             throw new Exception("No se puede registrar una cita en una fecha pasada");
