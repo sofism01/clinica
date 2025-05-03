@@ -72,6 +72,7 @@ public class RegistroPacienteControlador {
 
             limpiarCampos();
         } catch (Exception e) {
+
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
