@@ -62,7 +62,7 @@ public class ListaPacientesControlador implements Initializable {
         colNombrePaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colTelefonoPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
         colEmailPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-        colSuscripcionPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSuscripcion().toString()));
+        colSuscripcionPaciente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSuscripcion().getNombreSuscripcion().toString()));
 
         this.listaPacientes = FXCollections.observableArrayList();
         consultarPacientes(clinica.getPacientes());

@@ -2,7 +2,8 @@ package co.edu.uniquindio.clinica.enums;
 
 public enum TipoSuscripcion {
     BASICA("Básica"),
-    PREMIUM("Premium");
+    PREMIUM("Premium"),
+    SUPREME("Supreme");
 
     private final String nombre;
 
