@@ -1,5 +1,6 @@
 package co.edu.uniquindio.clinica.modelo;
 
+import co.edu.uniquindio.clinica.enums.TipoSuscripcion;
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

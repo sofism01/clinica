@@ -65,8 +65,11 @@ public class RegistroPacienteControlador {
                     txtNombre.getText(),
                     txtCedula.getText(),
                     txtTelefono.getText(),
-                    txtEmail.getText()
+                    txtEmail.getText(),
+                    null
+
 ); //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
+
             limpiarCampos();
         } catch (Exception e) {
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);

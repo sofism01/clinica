@@ -44,7 +44,7 @@ public class Clinica {
         alert.show();
     }
 
-    public void registrarPaciente(String nombre, String cedula, String telefono, String email) throws Exception{
+    public void registrarPaciente(String nombre, String cedula, String telefono, String email, Suscripcion suscripcion) throws Exception{
         // Validar que el paciente no esté repetido por cc
         if (cedulasRegistradas.contains(cedula)) {
             throw new Exception("El número de cedula ya está registrado");
