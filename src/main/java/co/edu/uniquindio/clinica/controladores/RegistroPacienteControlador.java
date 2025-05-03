@@ -7,6 +7,7 @@ import co.edu.uniquindio.clinica.modelo.Servicio;
 import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
 import co.edu.uniquindio.clinica.modelo.factory.SuscripcionBasica;
 import co.edu.uniquindio.clinica.modelo.factory.SuscripcionPremium;
+import co.edu.uniquindio.clinica.modelo.factory.SuscripcionSupreme;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,14 +62,26 @@ public class RegistroPacienteControlador {
     @FXML
     void registrarPaciente(ActionEvent event) {
         try {
+            String tipo = cmbSuscripcion.getValue();
+            Suscripcion suscripcion;
+
+            if (tipo.equals("Básica")) {
+                suscripcion = new SuscripcionBasica();
+            } else if (tipo.equals("Premium")) {
+                suscripcion = new SuscripcionPremium();
+            }  else if (tipo.equals("Supreme")) {
+                suscripcion = new SuscripcionSupreme();
+            }else {
+                throw new IllegalArgumentException("Tipo de suscripción no válido");
+            }
+
             clinica.registrarPaciente(
                     txtNombre.getText(),
                     txtCedula.getText(),
                     txtTelefono.getText(),
                     txtEmail.getText(),
-                    null
-
-); //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
+                    suscripcion);
+            //System.out.println(txtCedula.getText() + " " + txtEmail.getText() + " " + txtTelefono.getText());
 
             limpiarCampos();
             clinica.mostrarAlerta("Paciente registrado correctamente", Alert.AlertType.INFORMATION);

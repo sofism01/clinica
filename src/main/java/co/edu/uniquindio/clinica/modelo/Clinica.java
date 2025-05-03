@@ -9,7 +9,6 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
@@ -71,7 +70,7 @@ public class Clinica {
                 .cedula(cedula)
                 .telefono(telefono)
                 .email(email)
-                .suscripcion( new SuscripcionBasica())
+                .suscripcion(suscripcion)
                 .build();
         cedulasRegistradas.add(cedula);
         pacientes.add(paciente);
