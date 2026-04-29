@@ -18,6 +18,8 @@ public class Clinica {
     private List<Cita> citas;
     private List<Servicio> servicios;
     private List<Paciente> pacientes;
+    private final String medicoUsuario = "medico";
+    private final String medicoPassword = "doctor123";
     public static Clinica clinica;
     private Set<String> cedulasRegistradas = new HashSet<>();
 
@@ -33,6 +35,17 @@ public class Clinica {
         this.citas = new ArrayList<>();
         this.servicios = new ArrayList<>();
         this.pacientes = new ArrayList<>();
+    }
+
+    public boolean validarMedico(String usuario, String password) {
+        return medicoUsuario.equals(usuario) && medicoPassword.equals(password);
+    }
+
+    public Paciente validarPaciente(String usuario, String password) {
+        return pacientes.stream()
+                .filter(p -> usuario.equals(p.getUsername()) && password.equals(p.getPassword()))
+                .findFirst()
+                .orElse(null);
     }
 
     public void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
@@ -78,6 +91,8 @@ public class Clinica {
                 .telefono(telefono)
                 .email(email)
                 .suscripcion(suscripcion)
+                .username(cedula)
+                .password(cedula)
                 .build();
         cedulasRegistradas.add(cedula);
         pacientes.add(paciente);
@@ -108,12 +123,14 @@ public class Clinica {
 
         Factura factura = paciente.getSuscripcion().generarFacturaCobro(tipoServicio);
 
-        Cita cita = new Cita(idPaciente, dia, hora, paciente, factura);
-        cita.setId(UUID.randomUUID().toString());
-        cita.setFecha(dia);
-        cita.setHora(hora);
-        cita.setPaciente(paciente);
-        cita.setFactura(factura);
+        Cita cita = Cita.builder()
+                .id(UUID.randomUUID().toString())
+                .fecha(dia)
+                .hora(hora)
+                .paciente(paciente)
+                .factura(factura)
+                .tipoServicio(tipoServicio)
+                .build();
 
         citas.add(cita);
 

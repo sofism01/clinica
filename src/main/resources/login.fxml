@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.clinica.controladores.LoginControlador">
+    <children>
+        <VBox alignment="CENTER" layoutX="100.0" layoutY="80.0" prefHeight="320.0" prefWidth="420.0" spacing="15.0">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+            <Label text="Ingreso a la clínica" />
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Rol:" />
+                <ChoiceBox fx:id="cmbRol" prefWidth="170.0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Usuario:" />
+                <TextField fx:id="txtUsuario" prefWidth="220.0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Contraseña:" />
+                <PasswordField fx:id="txtPassword" prefWidth="220.0" />
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#ingresar" text="Ingresar" />
+            <Label text="Credenciales por defecto:" style="-fx-font-weight: bold;" />
+            <Label text="Médico: medico / doctor123" />
+        </VBox>
+    </children>
+</AnchorPane>

@@ -44,12 +44,12 @@ public class SuscripcionBasica implements Suscripcion {
         double total;
 
         Servicio servicio = getServiciosDisponibles().stream()
-                .filter(s -> s.getNombre().equals(tipoServicio))
+                .filter(s -> s.getNombre().equals(tipoServicio.name()))
                 .findFirst().orElse(null);
 
         if(servicio == null){
             total = subtotal;
-        }else{
+        } else {
             total = servicio.getPrecio();
         }
 

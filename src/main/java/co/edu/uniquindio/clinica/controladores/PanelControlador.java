@@ -4,12 +4,11 @@ import co.edu.uniquindio.clinica.modelo.Clinica;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-
-import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 public class PanelControlador {
 
@@ -56,6 +55,17 @@ public class PanelControlador {
         panelPrincipal.getChildren().setAll(node);
     }
 
+    @FXML
+    void regresarALogin(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Clínica - Ingreso");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private Parent cargarPanel(String fxmlFile) {
         try {

@@ -5,7 +5,9 @@ import co.edu.uniquindio.clinica.enums.TipoSuscripcion;
 import co.edu.uniquindio.clinica.modelo.Factura;
 import co.edu.uniquindio.clinica.modelo.Servicio;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 // para agregar este nuevo tipo de suscripción SUPREME se añadió tanto a la Enum "TipoSuscripcion"
 // como a la Factory "SuscripcionFactory", posteriormente se creó esta nueva clase y se le asignaron los servicios
@@ -58,6 +60,11 @@ public class SuscripcionSupreme implements Suscripcion{
 
     @Override
     public Factura generarFacturaCobro(TipoServicio tipoServicio) {
-        return null;
+        return Factura.builder()
+                .id(UUID.randomUUID().toString())
+                .fecha(LocalDateTime.now())
+                .subtotal(tipoServicio.getPrecio())
+                .total(0.0)
+                .build();
     }
 }

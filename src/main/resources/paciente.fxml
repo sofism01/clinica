@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.clinica.controladores.PacienteControlador">
+    <children>
+        <VBox spacing="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <Label fx:id="lblBienvenida" text="Bienvenido" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <TableView fx:id="tablaCitas" prefHeight="300.0">
+                <columns>
+                    <TableColumn fx:id="colIdCita" prefWidth="100.0" text="Cita" />
+                    <TableColumn fx:id="colFecha" prefWidth="120.0" text="Fecha" />
+                    <TableColumn fx:id="colHora" prefWidth="100.0" text="Hora" />
+                    <TableColumn fx:id="colServicio" prefWidth="150.0" text="Servicio" />
+                    <TableColumn fx:id="colAseguradora" prefWidth="150.0" text="Aseguradora" />
+                    <TableColumn fx:id="colPago" prefWidth="100.0" text="Pago" />
+                </columns>
+            </TableView>
+            <HBox spacing="30.0">
+                <VBox spacing="8.0">
+                    <Label text="Cita seleccionada:" />
+                    <Label fx:id="lblDetalleCita" text="-" />
+                </VBox>
+                <VBox spacing="8.0">
+                    <Label text="Aseguradora:" />
+                    <Label fx:id="lblAseguradora" text="-" />
+                </VBox>
+                <VBox spacing="8.0">
+                    <Label text="Pago:" />
+                    <Label fx:id="lblPago" text="-" />
+                </VBox>
+            </HBox>
+            <HBox spacing="20.0">
+                <Button fx:id="btnPagar" mnemonicParsing="false" onAction="#pagarCopago" text="Pagar copago" />
+                <Button mnemonicParsing="false" onAction="#cerrarSesion" text="Regresar" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

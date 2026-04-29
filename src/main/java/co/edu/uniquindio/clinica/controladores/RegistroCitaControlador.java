@@ -55,13 +55,12 @@ public class RegistroCitaControlador {
     void agendarCita(ActionEvent event) {
         try {
             String cedulaPaciente = txtCedula.getText();
-           clinica.registrarCita(
-                   cedulaPaciente,
-                   cmbServicio.getValue(),
-                   dpFecha.getValue(),
-                   cmbHora.getValue()
-
-           );
+            clinica.registrarCita(
+                    cedulaPaciente,
+                    cmbServicio.getValue(),
+                    dpFecha.getValue(),
+                    cmbHora.getValue()
+            );
 //el email de confirmación llega al spam del correo
 
             limpiarCampos();

@@ -11,10 +11,10 @@ import java.io.IOException;
 public class ClinicaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ClinicaApplication.class.getResource("/panel.fxml"));
-        Parent parent = loader.load ();
+        FXMLLoader loader = new FXMLLoader(ClinicaApplication.class.getResource("/login.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
-        stage.setTitle("Clínica");
+        stage.setTitle("Clínica - Ingreso");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

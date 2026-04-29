@@ -1,5 +1,6 @@
 package co.edu.uniquindio.clinica.modelo;
 
+import co.edu.uniquindio.clinica.enums.TipoServicio;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,5 +20,6 @@ public class Cita {
     private String hora;
     private Paciente paciente;
     private Factura factura;
+    private TipoServicio tipoServicio;
 
 }
