@@ -64,7 +64,7 @@ public class RegistroCitaControlador {
 //el email de confirmación llega al spam del correo
 
             limpiarCampos();
-            clinica.mostrarAlerta("Cita agendada correctamente, la factura fue enviada al email del paciente", Alert.AlertType.INFORMATION);
+            clinica.mostrarAlerta("La cita se registró correctamente", Alert.AlertType.INFORMATION);
 
         } catch (Exception e) {
             clinica.mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);

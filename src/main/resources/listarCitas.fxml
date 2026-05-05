@@ -18,7 +18,7 @@
 
     <TableView fx:id="tablaCitas" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="colIdCita" text="Identificación" />
+            <TableColumn fx:id="colIdCita" text="Documento" />
             <TableColumn fx:id="colFechaCita" text="Fecha" />
             <TableColumn fx:id="colPacienteCita" text="Paciente" />
             <TableColumn fx:id="colServicioCita" text="Servicio" />

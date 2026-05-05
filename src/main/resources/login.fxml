@@ -32,6 +32,7 @@
             <Button mnemonicParsing="false" onAction="#ingresar" text="Ingresar" />
             <Label text="Credenciales por defecto:" style="-fx-font-weight: bold;" />
             <Label text="Médico: medico / doctor123" />
+            <Label text="Paciente: usuario y contraseña = documento de identidad registrado por el médico." wrapText="true" />
         </VBox>
     </children>
 </AnchorPane>

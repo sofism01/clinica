@@ -90,16 +90,14 @@ public class ListaCitasControlador {
 
     @FXML
     void initialize() {
-        colIdCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        colIdCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaciente().getCedula()));
         colFechaCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
         colPacienteCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaciente().getNombre()));
-        colServicioCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaciente().getSuscripcion().getNombreSuscripcion().toString()));
+        colServicioCita.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoServicio().getNombre()));
 
         this.listaCitas = FXCollections.observableArrayList();
         consultarPacientes(clinica.getCitas());
-
-
-        }
+    }
 
 
 }
