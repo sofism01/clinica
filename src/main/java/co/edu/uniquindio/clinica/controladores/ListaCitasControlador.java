@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Window;
 
 import java.net.URL;
 import java.util.List;
@@ -69,10 +71,18 @@ public class ListaCitasControlador {
         } else {
             // Puedes mostrar una alerta si no hay selección
             Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.initModality(Modality.APPLICATION_MODAL);
+            Window owner = Window.getWindows().stream()
+                    .filter(Window::isShowing)
+                    .findFirst()
+                    .orElse(null);
+            if (owner != null) {
+                alerta.initOwner(owner);
+            }
             alerta.setTitle("Advertencia");
             alerta.setHeaderText(null);
             alerta.setContentText("Por favor seleccione una cita para cancelar.");
-            alerta.showAndWait();
+            alerta.show();
         }
     }
 

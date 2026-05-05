@@ -62,6 +62,9 @@ public class PanelControlador {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Clínica - Ingreso");
+            stage.setMaximized(true);
+            stage.setFullScreen(true);
+            stage.setResizable(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

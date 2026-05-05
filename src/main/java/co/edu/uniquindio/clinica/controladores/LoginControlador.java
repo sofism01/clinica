@@ -12,7 +12,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class LoginControlador {
 
@@ -64,8 +66,19 @@ public class LoginControlador {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Clínica - " + rol);
+            stage.setMaximized(true);
+            stage.setFullScreen(true);
+            stage.setResizable(false);
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            Window owner = Window.getWindows().stream()
+                    .filter(Window::isShowing)
+                    .findFirst()
+                    .orElse(null);
+            if (owner != null) {
+                alert.initOwner(owner);
+            }
             alert.setTitle("Error de acceso");
             alert.setHeaderText(null);
             alert.setContentText(e.getMessage());

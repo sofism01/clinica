@@ -5,6 +5,8 @@ import co.edu.uniquindio.clinica.modelo.factory.Suscripcion;
 import co.edu.uniquindio.clinica.modelo.factory.SuscripcionBasica;
 import co.edu.uniquindio.clinica.utils.EnvioEmail;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import javafx.stage.Window;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -50,6 +52,14 @@ public class Clinica {
 
     public void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        Window owner = Window.getWindows().stream()
+                .filter(Window::isShowing)
+                .findFirst()
+                .orElse(null);
+        if (owner != null) {
+            alert.initOwner(owner);
+        }
         alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);

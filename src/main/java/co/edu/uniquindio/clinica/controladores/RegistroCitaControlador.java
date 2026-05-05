@@ -79,7 +79,6 @@ public class RegistroCitaControlador {
 
     }
 
-
     @FXML
     void initialize() {
         cmbHora.getItems().addAll(clinica.generarHorarioCitas());

@@ -83,6 +83,7 @@ public class PacienteControlador {
         }
         List<Cita> citasPaciente = clinica.getCitas().stream()
                 .filter(cita -> cita.getPaciente().getCedula().equals(paciente.getCedula()))
+                .filter(cita -> !cita.getFactura().isPagado())
                 .toList();
         tablaCitas.setItems(FXCollections.observableArrayList(citasPaciente));
         if (citasPaciente.isEmpty()) {
@@ -117,6 +118,7 @@ public class PacienteControlador {
         if (cita.getFactura().isPagado()) {
             clinica.mostrarAlerta("Esta cita ya fue pagada.", Alert.AlertType.INFORMATION);
             return;
+          
         }
         if (cita.getFactura().getTotal() <= 0) {
             clinica.mostrarAlerta("No hay copago para esta cita.", Alert.AlertType.INFORMATION);
@@ -124,8 +126,9 @@ public class PacienteControlador {
         }
 
         cita.getFactura().setPagado(true);
-        tablaCitas.refresh();
-        mostrarDetalle(cita);
+        cargarCitas();
+        tablaCitas.getSelectionModel().clearSelection();
+        mostrarDetalle(null);
         clinica.mostrarAlerta("Copago pagado correctamente.", Alert.AlertType.INFORMATION);
     }
 
@@ -136,6 +139,9 @@ public class PacienteControlador {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Clínica - Ingreso");
+            stage.setMaximized(true);
+            stage.setFullScreen(true);
+            stage.setResizable(false);
         } catch (IOException e) {
             clinica.mostrarAlerta("No se pudo cerrar sesión.", Alert.AlertType.ERROR);
         }
